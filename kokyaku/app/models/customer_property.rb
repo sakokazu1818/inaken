@@ -1,4 +1,4 @@
 class CustomerProperty < ApplicationRecord
-  belongs_to :customers
-  belongs_to :properties
+  belongs_to :customer
+  belongs_to :property
 end

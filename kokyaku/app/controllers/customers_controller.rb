@@ -2,13 +2,11 @@ class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
   # GET /customers
-  # GET /customers.json
   def index
     @customers = Customer.all
   end
 
   # GET /customers/1
-  # GET /customers/1.json
   def show
   end
 
@@ -22,9 +20,11 @@ class CustomersController < ApplicationController
   end
 
   # POST /customers
-  # POST /customers.json
   def create
-    @customer = Customer.new(customer_params)
+    customer_params_hash = customer_params
+    properties_params = customer_params_hash.delete('properties')
+    @customer = Customer.new(customer_params_hash)
+    @customer.properties << Property.new(properties_params)
 
     respond_to do |format|
       if @customer.save
@@ -38,7 +38,6 @@ class CustomersController < ApplicationController
   end
 
   # PATCH/PUT /customers/1
-  # PATCH/PUT /customers/1.json
   def update
     respond_to do |format|
       if @customer.update(customer_params)
@@ -52,7 +51,6 @@ class CustomersController < ApplicationController
   end
 
   # DELETE /customers/1
-  # DELETE /customers/1.json
   def destroy
     @customer.destroy
     respond_to do |format|
@@ -69,6 +67,7 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:sex, :date_of_birth, :tel)
+      params.require(:customer).permit(:sex, :date_of_birth, :tel,
+        properties: [:agent, :name, :address])
     end
 end
