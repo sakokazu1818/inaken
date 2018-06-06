@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,14 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606052514) do
+ActiveRecord::Schema.define(version: 20180606080146) do
 
-  create_table "customers", force: :cascade do |t|
-    t.string   "sex",           limit: 255
-    t.date     "date_of_birth"
-    t.string   "tel",           limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+  create_table "customer_properties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "customer_id"
+    t.integer  "property_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["customer_id"], name: "index_customer_properties_on_customer_id", using: :btree
+    t.index ["property_id"], name: "index_customer_properties_on_property_id", using: :btree
   end
 
+  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "sex"
+    t.date     "date_of_birth"
+    t.string   "tel"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "properties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "agent"
+    t.string   "name"
+    t.text     "address",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_foreign_key "customer_properties", "customers"
+  add_foreign_key "customer_properties", "properties"
 end
