@@ -1,19 +1,50 @@
-<p id="notice"><%= notice %></p>
+<h1 class="container-fluid text-center" >顧客情報詳細</h1>
 
-<p>
-  <strong>Sex:</strong>
-  <%= @customer.sex %>
-</p>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-4"></div>
+		<div class="col-xs-4">
+      <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Date of birth:</strong>
-  <%= @customer.date_of_birth %>
-</p>
+      <h2 class="container-fluid text-center" >顧客情報</h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= '性別:' + @customer.sex %></td>
+          </tr>
+          <tr>
+            <td><%= '生年月日:' + @customer.date_of_birth.to_s %></td>
+          </tr>
+          <tr>
+            <td><%= '電話番号:' + @customer.tel %></td>
+          </tr>
+        </tbody>
+      </table>
 
-<p>
-  <strong>Tel:</strong>
-  <%= @customer.tel %>
-</p>
+      <h2 class="container-fluid text-center" >物件情報</h2>
+      <% @customer.properties.each_with_index do |property, i| %>
+        <h3 class="container-fluid text-center" >物件情報<%= (i + 1) %></h3>
+        <table class="table table-striped table-bordered">
+          <thead>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= '業者名:' + property.agent %></td>
+            </tr>
+            <tr>
+              <td><%= '物件名:' + property.name %></td>
+            </tr>
+            <tr>
+              <td><%= '物件住所:' + property.address %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
+      <%= link_to '編集', edit_customer_path(@customer), class: 'btn btn-warning' %>
+      <%= link_to '戻る', customers_path, class: 'btn btn-danger' %>
+    </div>
+  </div>
+</div>
