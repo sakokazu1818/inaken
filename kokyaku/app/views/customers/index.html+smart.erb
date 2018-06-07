@@ -24,8 +24,8 @@
               <td><%= customer.sex %></td>
               <td><%= customer.date_of_birth %></td>
               <td><%= customer.tel %></td>
-              <td><%= customer.properties[0].name.blank? ? 0 : customer.properties.size %></td>
-              <td><%= customer.properties[0].name %></td>
+              <td><%= customer.properties[0].nil? ? 0 : customer.properties.size %></td>
+              <td><%= customer.properties[0].nil? ? '-' : customer.properties[0].name %></td>
               <td>
                 <div class="container-fluid">
                   <div class="row pull-right">
