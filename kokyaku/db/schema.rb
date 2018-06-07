@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180606080146) do
-
-  create_table "customer_properties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "customer_id"
-    t.integer  "property_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["customer_id"], name: "index_customer_properties_on_customer_id", using: :btree
-    t.index ["property_id"], name: "index_customer_properties_on_property_id", using: :btree
-  end
+ActiveRecord::Schema.define(version: 20180606075319) do
 
   create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "sex"
@@ -32,11 +23,12 @@ ActiveRecord::Schema.define(version: 20180606080146) do
   create_table "properties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "agent"
     t.string   "name"
-    t.text     "address",    limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "address",     limit: 65535
+    t.integer  "customer_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["customer_id"], name: "index_properties_on_customer_id", using: :btree
   end
 
-  add_foreign_key "customer_properties", "customers"
-  add_foreign_key "customer_properties", "properties"
+  add_foreign_key "properties", "customers"
 end

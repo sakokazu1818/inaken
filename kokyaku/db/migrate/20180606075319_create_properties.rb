@@ -4,6 +4,7 @@ class CreateProperties < ActiveRecord::Migration[5.0]
       t.string :agent
       t.string :name
       t.text :address
+      t.references :customer, foreign_key: true
 
       t.timestamps
     end
