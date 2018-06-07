@@ -21,10 +21,7 @@ class CustomersController < ApplicationController
 
   # POST /customers
   def create
-    customer_params_hash = customer_params
-    properties_params = customer_params_hash.delete('properties')
-    @customer = Customer.new(customer_params_hash)
-    @customer.properties << Property.new(properties_params)
+    @customer = Customer.new(customer_params)
 
     respond_to do |format|
       if @customer.save
@@ -68,6 +65,6 @@ class CustomersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
       params.require(:customer).permit(:sex, :date_of_birth, :tel,
-        properties: [:agent, :name, :address])
+        properties_attributes: [:agent, :name, :address, :customer_id, :_destroy])
     end
 end
