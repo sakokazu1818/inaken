@@ -1,6 +1,13 @@
-<h1>Editing Customer</h1>
+<h1 class="container-fluid text-center" >顧客情報編集</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @customer %> |
-<%= link_to 'Back', customers_path %>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-4"></div>
+		<div class="col-xs-4">
+      <%= link_to '詳細', @customer, class: 'btn btn-warning' %>
+      <%= link_to '戻る', customers_path, class: 'btn btn-danger' %>
+    </div>
+	</div>
+</div>
