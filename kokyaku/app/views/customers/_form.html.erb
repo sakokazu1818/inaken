@@ -16,39 +16,46 @@
         <% end %>
 
 				<!-- 顧客情報 -->
-				<h2 class="container-fluid text-center" >顧客情報</h2>
-        <div class="field">
-          <%= f.label :sex %><br>
-          <%= f.text_field :sex %>
-        </div>
-        <div class="field">
-          <%= f.label :date_of_birth %><br>
-          <%= f.date_select :date_of_birth %>
-        </div>
-        <div class="field">
-          <%= f.label :tel %><br>
-          <%= f.number_field :tel %>
-        </div>
+				<div class="customer-info">
+					<h2 class="container-fluid text-center" >顧客情報</h2>
+					<div class="pt10 pb10 pl10">
+		        <div class="field">
+		          <%= f.label :sex %><br>
+		          <%= f.text_field :sex %>
+		        </div>
+		        <div class="field">
+		          <%= f.label :date_of_birth %><br>
+		          <%= f.date_select :date_of_birth %>
+		        </div>
+		        <div class="field">
+		          <%= f.label :tel %><br>
+		          <%= f.number_field :tel %>
+		        </div>
+				  </div>
+				</div>
 
 				<!-- 物件情報 -->
-				<h2 class="container-fluid text-center" >物件情報</h2>
-
-				<%= f.fields_for :properties do |ff| %>
-					<div class="field">
-						<%= ff.label :agent %><br>
-						<%= ff.text_field :agent %>
+				<div class="customer-info">
+					<h2 class="container-fluid text-center" >物件情報</h2>
+					<div class="pt10 pb10 pl10 mb10">
+						<%= f.fields_for :properties do |ff| %>
+							<div class="field">
+								<%= ff.label :agent %><br>
+								<%= ff.text_field :agent %>
+							</div>
+							<div class="field">
+								<%= ff.label :name %><br>
+								<%= ff.text_field :name %>
+							</div>
+							<div class="field">
+								<%= ff.label :address %><br>
+								<%= ff.text_field :address %>
+							</div>
+		          <%= ff.link_to_remove '物件削除', class: 'btn btn-warning mb10' %>
+				    <% end %>
+		        <%= f.link_to_add '物件追加', :properties, class: 'btn btn-primary mb10' %>
 					</div>
-					<div class="field">
-						<%= ff.label :name %><br>
-						<%= ff.text_field :name %>
-					</div>
-					<div class="field">
-						<%= ff.label :address %><br>
-						<%= ff.text_field :address %>
-					</div>
-          <%= ff.link_to_remove '物件削除', class: 'btn btn-warning mb10' %>
-		    <% end %>
-        <%= f.link_to_add '物件追加', :properties, class: 'btn btn-primary mb10' %>
+				</div>
 
 				<div class="actions">
           <%= f.submit class: 'btn btn-success' %>
